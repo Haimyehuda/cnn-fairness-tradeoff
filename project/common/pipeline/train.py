@@ -18,9 +18,10 @@ def train_one_epoch(model, loader, optimizer, criterion, device):
     return total / len(loader)
 
 
-def train_model(model, train_loader, device, lr=1e-3, epochs=5):
+def train_model(model, train_loader, device, lr=1e-3, epochs=5, criterion=None):
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
-    criterion = torch.nn.CrossEntropyLoss()
+    if criterion is None:
+        criterion = torch.nn.CrossEntropyLoss()
     losses = []
 
     for e in range(epochs):
